@@ -21,7 +21,11 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false
+            open: false,
+            form: {
+                name: '',
+                age: ''
+            }
         }
     }
 
@@ -45,6 +49,10 @@ class Dashboard extends Component {
         this.setState({ open: false })
     }
 
+    formStateChangeHandler = name => {
+        console.log('formstatechanhehandler', name);
+    }
+
     render() {
         return (
             <div className='wrapper'>
@@ -61,7 +69,9 @@ class Dashboard extends Component {
                                 deleteHandler={this.onDeleteHandler}>
                             </EmpTable>
                         </div>
-                        <EmpModal open={this.state.open} close={this.closeModalHandler}>
+                        <EmpModal open={this.state.open}
+                            close={this.closeModalHandler}
+                            handleChange={this.formStateChangeHandler}>
                         </EmpModal>
                     </div>
                 </div>

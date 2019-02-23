@@ -37,12 +37,10 @@ class Dashboard extends Component {
         console.log('edit handler', id);
     }
 
-    addEmployeeHandler = () => {
-        this.setState({ open: true });
-    }
 
     openModalHandler = () => {
         this.setState({ open: true })
+        console.log('open handler', this.state.open);
     }
 
     closeModalHandler = () => {
@@ -60,7 +58,7 @@ class Dashboard extends Component {
                     <div className='col-md-1 col-lg-1'></div>
                     <div className='col-md-10 col-lg-10'>
                         <div className='emp-btn'>
-                            <Button color='primary' onClick={this.addEmployeeHandler}>Add Employee</Button>
+                            <Button color='primary' onClick={this.openModalHandler}>Add Employee</Button>
                         </div>
                         <div className='table-wrapper justify-content-center'>
                             <EmpTable tableHeadings={EMP_FIELDS}
@@ -69,9 +67,8 @@ class Dashboard extends Component {
                                 deleteHandler={this.onDeleteHandler}>
                             </EmpTable>
                         </div>
-                        <EmpModal open={this.state.open}
-                            close={this.closeModalHandler}
-                            handleChange={this.formStateChangeHandler}>
+                        <EmpModal  open = {this.state.open}
+                           closeModal={this.closeModalHandler}>
                         </EmpModal>
                     </div>
                 </div>

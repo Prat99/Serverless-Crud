@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import './emptable.css';
 
 const empTable = (props) => {
     const rows = [...props.tableData];
@@ -21,6 +22,7 @@ const empTable = (props) => {
                 </TableHead>
                 <TableBody>
                     {
+                        rows.length > 0 ?
                         rows.map((row, id) => (
                             <TableRow key={row+id}>
                                 <TableCell component='th' scope='row'>{row.name}</TableCell>
@@ -30,15 +32,16 @@ const empTable = (props) => {
                                 <TableCell>{row.address}</TableCell>
                                 <TableCell>{row.expertise}</TableCell>
                                 <TableCell>
-                                    <Button color="primary" onClick={() => props.deleteHandler(row.id)}>
+                                    <Button color="primary" onClick={() => props.editHandler(row)}>
                                         Edit
                                     </Button>
-                                    <Button color="secondary" onClick={() => props.editHandler(row.id)}>
+                                    <Button color="secondary" onClick={() => props.deleteHandler(row)}>
                                         Delete
                                     </Button>
                                 </TableCell>
                             </TableRow>
-                        ))
+                        )) : 
+                        <p className='nd-class'>No Data Available</p>
                     }
                 </TableBody>
             </Table>

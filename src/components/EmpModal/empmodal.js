@@ -38,7 +38,10 @@ const fields = [{ label: 'Angularjs', value: 10 },
 class EmpModal extends Component {
     constructor(props) {
         super(props);
-
+        // props.editEmpData ? this.setInitialState(props.editEmpData) : null;
+        if (props.editEmpData) {
+            this.setInitialState(props.editEmpData);
+        }
         this.state = {
             employee: {
                 name: '',
@@ -49,6 +52,26 @@ class EmpModal extends Component {
                 expertise: ''
             }
         }
+    }
+
+    setInitialState = (editState) => {
+        this.setState(
+            {
+                employee: {
+                    name: editState.name,
+                    age: editState.age,
+                    email: editState.emial,
+                    salary: editState.salary,
+                    address: editState.address,
+                    expertise: editState.expertise,
+                }
+            }
+        );
+        console.log('edit state', this.state);
+    }
+
+    populeEmpData(data) {
+
     }
 
     openModalHandler = () => {
@@ -68,6 +91,7 @@ class EmpModal extends Component {
 
     addEmployeeHandler = () => {
         console.log('complete form', this.state.employee);
+        this.props.tableData(this.state.employee);
         this.resetForm();
     }
 
@@ -88,7 +112,12 @@ class EmpModal extends Component {
     render() {
         const open = this.props.open;
         const { classes } = this.props;
-        const { employee: { name, age, email, salary, address, expertise } } = this.state;
+        if (this.props.editEmpData) {
+            console.log('this.props.editEmpData', this.props.editEmpData);
+            var { name, age, email, salary, address, expertise } = this.props.editEmpData;
+        } else {
+            var { employee: { name, age, email, salary, address, expertise } } = this.state;
+        }
         return (
             <Dialog
                 open={open}
@@ -155,7 +184,7 @@ class EmpModal extends Component {
                             margin="normal"
                         >
                             {fields.map(option => (
-                                <MenuItem key={option.value} value={option.value}>
+                                <MenuItem key={option.label} value={option.label}>
                                     {option.label}
                                 </MenuItem>
                             ))}

@@ -8,12 +8,12 @@ import './dashboard.css';
 const EMP_FIELDS = ['name', 'age', 'email', 'salary', 'address', 'expertise', 'actions'];
 const TABLE_DATA = [
     {
-        name: 'John', age: 30, email: 'john@gmail.com', salary: 45000,
-        address: '35, dy street, chicago', expertise: 'reactjs', id: 1
+        name: 'Foo', age: 30, email: 'foo@gmail.com', salary: 55000,
+        address: '35, dy street, chicago', expertise: 'Nodejs', 
     },
     {
-        name: 'John', age: 30, email: 'john@gmail.com', salary: 45000,
-        address: '35, dy street, chicago', expertise: 'reactjs', id: 2
+        name: 'John', age: 25, email: 'john@gmail.com', salary: 45000,
+        address: '35, dy street, chicago', expertise: 'Reactjs',
     }
 ];
 
@@ -22,24 +22,33 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             open: false,
-            form: {
-                name: '',
-                age: ''
-            }
+            tableData: TABLE_DATA,
+            editEmployee: ''
         }
     }
 
     onDeleteHandler = (id) => {
         console.log('delete handler', id);
+        const data = [...this.state.tableData];
+        const _data= data.filter(td => {
+             return td.email !== id.email;
+         });
+        this.setState({
+            tableData: _data
+        });
     }
 
-    onEditHandler = (id) => {
-        console.log('edit handler', id);
+    onEditHandler = (emp) => {
+        
+        this.setState({ 
+            editEmployee: emp,
+            open: true
+         });
+         console.log('edit handler', this.state);
     }
-
 
     openModalHandler = () => {
-        this.setState({ open: true })
+        this.setState({ open: true, editEmployee: '' })
         console.log('open handler', this.state.open);
     }
 
@@ -51,7 +60,18 @@ class Dashboard extends Component {
         console.log('formstatechanhehandler', name);
     }
 
+    tableDataChangeHandler = (employee) => {
+      console.log('table data', employee);
+      const data = [...this.state.tableData];
+      data.push(employee)
+      this.setState({
+          tableData: data
+      })
+      // TABLE_DATA.push({...data});
+    }
+
     render() {
+        console.log('dashboard render method call');
         return (
             <div className='wrapper'>
                 <div className='row'>
@@ -62,12 +82,14 @@ class Dashboard extends Component {
                         </div>
                         <div className='table-wrapper justify-content-center'>
                             <EmpTable tableHeadings={EMP_FIELDS}
-                                tableData={TABLE_DATA}
+                                tableData={this.state.tableData}
                                 editHandler={this.onEditHandler}
                                 deleteHandler={this.onDeleteHandler}>
                             </EmpTable>
                         </div>
                         <EmpModal  open = {this.state.open}
+                           editEmpData = {this.state.editEmployee}
+                           tableData = {this.tableDataChangeHandler}
                            closeModal={this.closeModalHandler}>
                         </EmpModal>
                     </div>

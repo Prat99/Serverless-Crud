@@ -23,7 +23,8 @@ class Dashboard extends Component {
         this.state = {
             open: false,
             tableData: TABLE_DATA,
-            editEmployee: ''
+            editEmployee: '',
+            isEdit: false
         }
     }
 
@@ -38,11 +39,11 @@ class Dashboard extends Component {
         });
     }
 
-    onEditHandler = (emp) => {
-        
+    onEditHandler = (emp) => {  
         this.setState({ 
             editEmployee: emp,
-            open: true
+            open: true,
+            isEdit: true
          });
          console.log('edit handler', this.state);
     }
@@ -67,11 +68,13 @@ class Dashboard extends Component {
       this.setState({
           tableData: data
       })
-      // TABLE_DATA.push({...data});
     }
 
     render() {
         console.log('dashboard render method call');
+
+
+
         return (
             <div className='wrapper'>
                 <div className='row'>

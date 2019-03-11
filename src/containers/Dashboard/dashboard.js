@@ -28,6 +28,16 @@ class Dashboard extends Component {
         }
     }
 
+    componentDidMount() {
+        fetch('https://91rjrnn176.execute-api.ap-south-1.amazonaws.com/dev/get-all')
+        .then(res => {
+            res.json()
+            .then(response => {
+              console.log('final response', response);    
+            })
+        })
+    }
+
     onDeleteHandler = (id) => {
         console.log('delete handler', id);
         const data = [...this.state.tableData];
@@ -72,9 +82,6 @@ class Dashboard extends Component {
 
     render() {
         console.log('dashboard render method call');
-
-
-
         return (
             <div className='wrapper'>
                 <div className='row'>

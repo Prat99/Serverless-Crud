@@ -58,24 +58,40 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello: # a function
-    handler: handler.hello
+  # hello: # a function
+  #   handler: handler.hello
+  #   events:
+  #     - http:
+  #        path: /
+  #        method: get
+  get:
+    handler: employee/get.get
     events:
       - http:
-         path: /
+         path: get-all
          method: get
-  getEmployees:
-    handler: handler.getEmployees
+         cors: true
+  create:
+    handler: employee/create.create
     events:
       - http:
-         path: employees
-         method: get
-  addEmployee:
-    handler: handler.addEmployee
-    events:
-      - http:
-         path: add-employee
+         path: add-entity
          method: post
+         cors: true
+  delete:
+    handler: employee/delete.delete
+    events:
+      - http:
+         path: delete-entity/{id}
+         method: delete
+         cors: true
+  edit:
+    handler: employee/edit.edit
+    events:
+      - http:
+         path: edit-entity
+         method: post
+         cors: true        
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

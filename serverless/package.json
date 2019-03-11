@@ -1,0 +1,16 @@
+{
+  "name": "serverless",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "prateek",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.416.0",
+    "mysql": "^2.16.0",
+    "mysqljs": "0.0.2-security"
+  }
+}

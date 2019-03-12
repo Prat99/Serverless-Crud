@@ -18,6 +18,7 @@ module.exports.create = (event, context, callback) => {
         const response = {
             statusCode: 400,
             headers: {
+                'Access-Control-Allow-Origin': '*',
                 "Content-Type": "application/json"
             },
             body: 'no employee provided error'
@@ -37,6 +38,10 @@ module.exports.create = (event, context, callback) => {
             if (results.length > 0) {
                 const response = {
                     statusCode: 400,
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        "Content-Type": "application/json"
+                    },
                     body: JSON.stringify({
                         message: 'user already present'
                     })
@@ -52,6 +57,10 @@ module.exports.create = (event, context, callback) => {
                     console.log('db results', results);
                     const response = {
                         statusCode: 200,
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                            "Content-Type": "application/json"
+                        },
                         body: JSON.stringify({
                             message: 'successfully created'
                         })

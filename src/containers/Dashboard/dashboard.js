@@ -6,23 +6,23 @@ import Button from '@material-ui/core/Button';
 import './dashboard.css';
 
 const EMP_FIELDS = ['name', 'age', 'email', 'salary', 'address', 'expertise', 'actions'];
-const TABLE_DATA = [
-    {
-        name: 'Foo', age: 30, email: 'foo@gmail.com', salary: 55000,
-        address: '35, dy street, chicago', expertise: 'Nodejs', 
-    },
-    {
-        name: 'John', age: 25, email: 'john@gmail.com', salary: 45000,
-        address: '35, dy street, chicago', expertise: 'Reactjs',
-    }
-];
+// const TABLE_DATA = [
+//     {
+//         name: 'Foo', age: 30, email: 'foo@gmail.com', salary: 55000,
+//         address: '35, dy street, chicago', expertise: 'Nodejs', 
+//     },
+//     {
+//         name: 'John', age: 25, email: 'john@gmail.com', salary: 45000,
+//         address: '35, dy street, chicago', expertise: 'Reactjs',
+//     }
+// ];
 
 class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
             open: false,
-            tableData: TABLE_DATA,
+            tableData: '',
             editEmployee: '',
             isEdit: false
         }
@@ -34,6 +34,9 @@ class Dashboard extends Component {
             res.json()
             .then(response => {
               console.log('final response', response);    
+              this.setState({
+                  tableData: response.employees
+              })
             })
         })
     }
@@ -72,12 +75,29 @@ class Dashboard extends Component {
     }
 
     tableDataChangeHandler = (employee) => {
-      console.log('table data', employee);
-      const data = [...this.state.tableData];
-      data.push(employee)
-      this.setState({
-          tableData: data
+      console.log('Employee payload --->', employee);
+      fetch('https://91rjrnn176.execute-api.ap-south-1.amazonaws.com/dev/add-entity', {
+          method: 'POST',
+          mode: "no-cors", // no-cors, cors, *same-origin
+        //   headers: {
+        //     "Content-Type": "application/json"
+        // },
+          body: JSON.stringify(employee)
       })
+        .then(res => {
+            res.json()
+            .then(response => {
+              console.log('final response', response);    
+              this.setState({
+                  tableData: response.employees
+              })
+            })
+        })
+    //   const data = [...this.state.tableData];
+    //   data.push(employee)
+    //   this.setState({
+    //       tableData: data
+    //   })
     }
 
     render() {

@@ -40,8 +40,11 @@ const empTable = (props) => {
                                     </Button>
                                 </TableCell>
                             </TableRow>
-                        )) : 
-                        <p className='nd-class'>No Data Available</p>
+                        )) :
+                        <TableRow>
+                            <TableCell className='nd-class'>No Data Available</TableCell>
+                        </TableRow> 
+                        // <span className='nd-class'>No Data Available</span>
                     }
                 </TableBody>
             </Table>

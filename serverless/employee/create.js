@@ -61,8 +61,10 @@ module.exports.create = (event, context, callback) => {
                             'Access-Control-Allow-Origin': '*',
                             "Content-Type": "application/json"
                         },
+                        message: 'successfully created',
+
                         body: JSON.stringify({
-                            message: 'successfully created'
+                          employees : results[0]
                         })
                     };
                     callback(null, response);

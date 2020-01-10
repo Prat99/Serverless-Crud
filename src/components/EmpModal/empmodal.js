@@ -5,10 +5,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -67,11 +63,7 @@ class EmpModal extends Component {
                 }
             }
         );
-        console.log('edit state', this.state);
-    }
-
-    populeEmpData(data) {
-
+        
     }
 
     openModalHandler = () => {
@@ -85,18 +77,15 @@ class EmpModal extends Component {
                 [name]: e.target.value
             }
         });
-        console.log('name', name);
-        console.log('event', e);
     }
 
     addEmployeeHandler = () => {
-        console.log('complete form', this.state.employee);
+       
         this.props.tableData(this.state.employee);
         this.resetForm();
     }
 
     resetForm = () => {
-        //document.getElementById('employeeForm').reset();
         this.setState({
             employee: {
                 name: '',
@@ -113,7 +102,6 @@ class EmpModal extends Component {
         const open = this.props.open;
         const { classes } = this.props;
         if (this.props.editEmpData) {
-            console.log('this.props.editEmpData', this.props.editEmpData);
             var { name, age, email, salary, address, expertise } = this.props.editEmpData;
         } else {
             var { employee: { name, age, email, salary, address, expertise } } = this.state;
